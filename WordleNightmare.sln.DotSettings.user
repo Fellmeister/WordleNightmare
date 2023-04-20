@@ -1,0 +1,4 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d246ec2c_002D3f95_002D4f89_002D89ca_002D51754322f874/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldFindGreenSquare" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Namespace&gt;Tests&lt;/Namespace&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
