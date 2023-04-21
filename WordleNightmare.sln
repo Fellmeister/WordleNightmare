@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NightmareFinder.Tests", "Ni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NightmareFinder", "NightmareFinder\NightmareFinder.csproj", "{E17C000F-3D11-4399-AE0F-B21D42915EFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{665B479F-785E-4B7E-B8E7-602E1E37CAF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NightmareFinder.Core", "NightmareFinder.Core\NightmareFinder.Core.csproj", "{665B479F-785E-4B7E-B8E7-602E1E37CAF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
