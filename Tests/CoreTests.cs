@@ -1,6 +1,6 @@
 using Shouldly;
 using static Tests.SolutionReader;
-using static Tests.WordleConstants;
+using static Tests.WordleSquareType;
 
 namespace Tests;
 
@@ -9,7 +9,7 @@ public class CoreTests
     [Fact]
     public void ShouldFindGreenSquare()
     {
-        var greenSquare = GreenSquare;
+        var greenSquare = Green;
         IsGreenSquare(greenSquare).ShouldBeTrue();
         IsBlackSquare(greenSquare).ShouldBeFalse();
         IsYellowSquare(greenSquare).ShouldBeFalse();
@@ -18,7 +18,7 @@ public class CoreTests
     [Fact]
     public void ShouldFindYellowSquare()
     {
-        var yellowSquare = YellowSquare;
+        var yellowSquare = Yellow;
         IsGreenSquare(yellowSquare).ShouldBeFalse();
         IsBlackSquare(yellowSquare).ShouldBeFalse();
         IsYellowSquare(yellowSquare).ShouldBeTrue();
@@ -27,57 +27,25 @@ public class CoreTests
     [Fact]
     public void ShouldFindBlackSquare()
     {
-        var blackSquare = BlackSquare;
+        var blackSquare = Black;
         IsGreenSquare(blackSquare).ShouldBeFalse();
         IsBlackSquare(blackSquare).ShouldBeTrue();
         IsYellowSquare(blackSquare).ShouldBeFalse();
     }
 
-    [Fact]
-    public void ShouldMatchLastThreeLines()
-    {
-        var lines = new []
-        {
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-        };
-
-        LastThreeLinesMatch(lines).ShouldBeTrue();
-    }
-
-    [Fact]
-    public void ShouldNotMatchLastThreeLines()
-    {
-        var lines = new []
-        {
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, GreenSquare, YellowSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-        };
-            LastThreeLinesMatch(lines).ShouldBeFalse();
-    }
-
-
     [Theory]
-    [InlineData(0, new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare })]
-    [InlineData(1, new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare })]
-    [InlineData(2, new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare })]
-    [InlineData(3, new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare })]
-    [InlineData(4, new[] { YellowSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
-    [InlineData(5, new[] { GreenSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
-    [InlineData(0, new[] { BlackSquare, BlackSquare, BlackSquare, BlackSquare, BlackSquare })]
-    [InlineData(1, new[] { BlackSquare, BlackSquare, BlackSquare, BlackSquare, GreenSquare })]
-    [InlineData(2, new[] { BlackSquare, BlackSquare, BlackSquare, GreenSquare, GreenSquare })]
-    [InlineData(3, new[] { BlackSquare, BlackSquare, GreenSquare, GreenSquare, GreenSquare })]
-    [InlineData(4, new[] { BlackSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
-    [InlineData(5, new[] { GreenSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
+    [InlineData(0, new[] { Yellow, Yellow, Yellow, Yellow, Yellow })]
+    [InlineData(1, new[] { Yellow, Yellow, Yellow, Yellow, Green })]
+    [InlineData(2, new[] { Yellow, Yellow, Yellow, Green, Green })]
+    [InlineData(3, new[] { Yellow, Yellow, Green, Green, Green })]
+    [InlineData(4, new[] { Yellow, Green, Green, Green, Green })]
+    [InlineData(5, new[] { Green, Green, Green, Green, Green })]
+    [InlineData(0, new[] { Black, Black, Black, Black, Black })]
+    [InlineData(1, new[] { Black, Black, Black, Black, Green })]
+    [InlineData(2, new[] { Black, Black, Black, Green, Green })]
+    [InlineData(3, new[] { Black, Black, Green, Green, Green })]
+    [InlineData(4, new[] { Black, Green, Green, Green, Green })]
+    [InlineData(5, new[] { Green, Green, Green, Green, Green })]
     public void ShouldReturnGreenSquareCount(int expected, string[] line)
     {
         GreenSquareCount(line).ShouldBe(expected);
@@ -88,12 +56,12 @@ public class CoreTests
     {
         var lines = new []
         {
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { Yellow, Yellow, Yellow, Yellow, Yellow },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
         };
 
         IsWordleNightmare(lines).ShouldBeTrue();
@@ -104,12 +72,12 @@ public class CoreTests
     {
         var lines = new []
         {
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, GreenSquare, YellowSquare, GreenSquare, GreenSquare },
-            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { Yellow, Yellow, Yellow, Yellow, Yellow },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Green, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
         };
 
         IsWordleNightmare(lines).ShouldBeFalse();
