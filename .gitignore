@@ -3,4 +3,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
-WordleNightmare.sln.DotSettings.user
+../WordleNightmare.sln.DotSettings.user
+debug.log
