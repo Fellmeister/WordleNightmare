@@ -1,4 +1,3 @@
-using System.Threading.Tasks.Sources;
 using Shouldly;
 
 namespace Tests;
@@ -31,108 +30,93 @@ public class CoreTests
         SolutionReader.IsBlackSquare(blackSquare).ShouldBeTrue();
         SolutionReader.IsYellowSquare(blackSquare).ShouldBeFalse();
     }
-    
+
     [Fact]
     public void ShouldMatchRepeatedLines()
     {
         var lines = new string[] { "G,G,G,X,G", "G,G,G,X,G" };
         SolutionReader.TwoLinesMatch(lines).ShouldBeTrue();
     }
-    
+
     [Fact]
     public void ShouldMatchLastThreeLines()
     {
-        var lines = new string[]
+        var lines = new []
         {
-            "G,G,X,X,G",
-            "G,X,G,X,G", 
-            "G,X,X,X,G",
-            "G,G,G,X,G",
-            "G,G,G,X,G", 
-            "G,G,G,X,G",
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
+            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
         };
-        
+
         SolutionReader.LastThreeLinesMatch(lines).ShouldBeTrue();
     }
-    
+
     [Fact]
     public void ShouldNotMatchLastThreeLines()
     {
-        var lines = new string[]
+        var lines = new []
         {
-            "G,G,X,X,G",
-            "G,X,G,X,G", 
-            "G,X,X,X,G",
-            "G,G,G,X,G",
-            "G,G,G,X,G", 
-            "G,G,G,G,G",
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
+            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new string[] { "🟨", "🟩", "🟨", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
         };
-        
-        SolutionReader.LastThreeLinesMatch(lines).ShouldBeFalse();
+            SolutionReader.LastThreeLinesMatch(lines).ShouldBeFalse();
     }
-    
-    
+
+
     [Theory]
-    [InlineData(0, new string[]{"🟨","🟨","🟨","🟨","🟨"})]
-    [InlineData(1, new string[]{"🟨","🟨","🟨","🟨","🟩"})]
-    [InlineData(2, new string[]{"🟨","🟨","🟨","🟩","🟩"})]
-    [InlineData(3, new string[]{"🟨","🟨","🟩","🟩","🟩"})]
-    [InlineData(4, new string[]{"🟨","🟩","🟩","🟩","🟩"})]
-    [InlineData(5, new string[]{"🟩","🟩","🟩","🟩","🟩"})]
+    [InlineData(0, new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" })]
+    [InlineData(1, new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" })]
+    [InlineData(2, new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" })]
+    [InlineData(3, new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" })]
+    [InlineData(4, new string[] { "🟨", "🟩", "🟩", "🟩", "🟩" })]
+    [InlineData(5, new string[] { "🟩", "🟩", "🟩", "🟩", "🟩" })]
+    [InlineData(0, new string[] { "⬛️", "⬛️", "⬛️", "⬛️", "⬛️" })]
+    [InlineData(1, new string[] { "⬛️", "⬛️", "⬛️", "⬛️", "🟩" })]
+    [InlineData(2, new string[] { "⬛️", "⬛️", "⬛️", "🟩", "🟩" })]
+    [InlineData(3, new string[] { "⬛️", "⬛️", "🟩", "🟩", "🟩" })]
+    [InlineData(4, new string[] { "⬛️", "🟩", "🟩", "🟩", "🟩" })]
+    [InlineData(5, new string[] { "🟩", "🟩", "🟩", "🟩", "🟩" })]
     public void ShouldReturnGreenSquareCount(int expected, string[] line)
     {
         SolutionReader.GreenSquareCount(line).ShouldBe(expected);
     }
 
-}
-
-public static class SolutionReader
-{
-    public static bool IsBlackSquare(string s)
+    [Fact]
+    public void ShouldReturnTrueIfWordleNightmare()
     {
-        return s.Equals("⬛️");
-    }   
-    public static bool IsYellowSquare(string s)
-    {
-        return s.Equals("🟨");
-    }
-    public static bool IsGreenSquare(string s)
-    {
-        return s.Equals("🟩");
-    }
-
-    public static bool TwoLinesMatch(string[] lines)
-    {
-        var ret = lines[0].Equals(lines[1]);
-        return ret;
-    }
-
-    /// <summary>
-    /// This is essentially a Wordle Nightmare!!!
-    ///
-    /// Assumptions: Text has been pre-read and this is only hit when it's confirmed to be a wipe out.
-    /// </summary>
-    /// <param name="lines"></param>
-    /// <returns></returns>
-    public static bool LastThreeLinesMatch(string[] lines)
-    {
-        var items = lines.Reverse().ToList();    // get them ordered to see the last ones 
-        var pattern = items.Take(1).ToList()[0];    // get the first pattern to match
-        var isMatch = true;
-        
-        for (int i = 0; i < 3; i++)
+        var lines = new []
         {
-            isMatch = isMatch && pattern.Equals(items[i]);
-        }
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
+            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+        };
 
-        return isMatch;
+        SolutionReader.IsWordleNightmare(lines).ShouldBeTrue();
     }
-
-    public static int GreenSquareCount(string[] line)
+    
+    [Fact]
+    public void ShouldReturnFalseIfNotWordleNightmare()
     {
-        var vals = line.Select(x => x);
-        
-        return vals.Count(IsGreenSquare);
+        var lines = new []
+        {
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
+            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
+            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new string[] { "🟨", "🟩", "🟨", "🟩", "🟩" },
+            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+        };
+
+        SolutionReader.IsWordleNightmare(lines).ShouldBeFalse();
     }
 }
-
