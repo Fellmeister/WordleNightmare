@@ -1,6 +1,7 @@
+using static Core.WordleSquareType;
+using static NightmareFinder.SolutionReader;
 using Shouldly;
-using static Tests.SolutionReader;
-using static Tests.WordleSquareType;
+using Xunit;
 
 namespace Tests;
 

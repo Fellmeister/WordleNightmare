@@ -1,6 +1,6 @@
-using static Tests.WordleSquareType;
+using static Core.WordleSquareType;
 
-namespace Tests;
+namespace NightmareFinder;
 
 public static class SolutionReader
 {

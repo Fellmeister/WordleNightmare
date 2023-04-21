@@ -1,4 +1,4 @@
-namespace Tests;
+namespace Core;
 
 public static class WordleSquareType
 {
