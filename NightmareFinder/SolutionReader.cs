@@ -1,4 +1,4 @@
-using static Core.WordleSquareType;
+using static NightmareFinder.Core.WordleSquareType;
 
 namespace NightmareFinder;
 

@@ -1,11 +1,11 @@
-using static Core.WordleSquareType;
+using static NightmareFinder.Core.WordleSquareType;
 using static NightmareFinder.SolutionReader;
 using Shouldly;
 using Xunit;
 
-namespace Tests;
+namespace NightmareFinder.Test;
 
-public class CoreTests
+public class SolutionReaderTests
 {
     [Fact]
     public void ShouldFindGreenSquare()

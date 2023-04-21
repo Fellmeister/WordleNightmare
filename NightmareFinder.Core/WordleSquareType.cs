@@ -1,4 +1,4 @@
-namespace Core;
+namespace NightmareFinder.Core;
 
 public static class WordleSquareType
 {

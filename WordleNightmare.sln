@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NightmareFinder.Tests", "NightmareFinder.Tests\NightmareFinder.Tests.csproj", "{9CDC5834-D73C-45A0-901E-0A30B10F9A7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NightmareFinder.Test", "NightmareFinder.Test\NightmareFinder.Test.csproj", "{9CDC5834-D73C-45A0-901E-0A30B10F9A7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NightmareFinder", "NightmareFinder\NightmareFinder.csproj", "{E17C000F-3D11-4399-AE0F-B21D42915EFA}"
 EndProject
