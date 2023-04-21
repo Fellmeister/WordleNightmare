@@ -1,4 +1,6 @@
 using Shouldly;
+using static Tests.SolutionReader;
+using static Tests.WordleConstants;
 
 namespace Tests;
 
@@ -7,35 +9,28 @@ public class CoreTests
     [Fact]
     public void ShouldFindGreenSquare()
     {
-        var greenSquare = "🟩";
-        SolutionReader.IsGreenSquare(greenSquare).ShouldBeTrue();
-        SolutionReader.IsBlackSquare(greenSquare).ShouldBeFalse();
-        SolutionReader.IsYellowSquare(greenSquare).ShouldBeFalse();
+        var greenSquare = GreenSquare;
+        IsGreenSquare(greenSquare).ShouldBeTrue();
+        IsBlackSquare(greenSquare).ShouldBeFalse();
+        IsYellowSquare(greenSquare).ShouldBeFalse();
     }
 
     [Fact]
     public void ShouldFindYellowSquare()
     {
-        var yellowSquare = "🟨";
-        SolutionReader.IsGreenSquare(yellowSquare).ShouldBeFalse();
-        SolutionReader.IsBlackSquare(yellowSquare).ShouldBeFalse();
-        SolutionReader.IsYellowSquare(yellowSquare).ShouldBeTrue();
+        var yellowSquare = YellowSquare;
+        IsGreenSquare(yellowSquare).ShouldBeFalse();
+        IsBlackSquare(yellowSquare).ShouldBeFalse();
+        IsYellowSquare(yellowSquare).ShouldBeTrue();
     }
 
     [Fact]
     public void ShouldFindBlackSquare()
     {
-        var blackSquare = "⬛️";
-        SolutionReader.IsGreenSquare(blackSquare).ShouldBeFalse();
-        SolutionReader.IsBlackSquare(blackSquare).ShouldBeTrue();
-        SolutionReader.IsYellowSquare(blackSquare).ShouldBeFalse();
-    }
-
-    [Fact]
-    public void ShouldMatchRepeatedLines()
-    {
-        var lines = new string[] { "G,G,G,X,G", "G,G,G,X,G" };
-        SolutionReader.TwoLinesMatch(lines).ShouldBeTrue();
+        var blackSquare = BlackSquare;
+        IsGreenSquare(blackSquare).ShouldBeFalse();
+        IsBlackSquare(blackSquare).ShouldBeTrue();
+        IsYellowSquare(blackSquare).ShouldBeFalse();
     }
 
     [Fact]
@@ -43,15 +38,15 @@ public class CoreTests
     {
         var lines = new []
         {
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
-            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
         };
 
-        SolutionReader.LastThreeLinesMatch(lines).ShouldBeTrue();
+        LastThreeLinesMatch(lines).ShouldBeTrue();
     }
 
     [Fact]
@@ -59,33 +54,33 @@ public class CoreTests
     {
         var lines = new []
         {
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
-            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
-            new string[] { "🟨", "🟩", "🟨", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, GreenSquare, YellowSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
         };
-            SolutionReader.LastThreeLinesMatch(lines).ShouldBeFalse();
+            LastThreeLinesMatch(lines).ShouldBeFalse();
     }
 
 
     [Theory]
-    [InlineData(0, new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" })]
-    [InlineData(1, new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" })]
-    [InlineData(2, new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" })]
-    [InlineData(3, new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" })]
-    [InlineData(4, new string[] { "🟨", "🟩", "🟩", "🟩", "🟩" })]
-    [InlineData(5, new string[] { "🟩", "🟩", "🟩", "🟩", "🟩" })]
-    [InlineData(0, new string[] { "⬛️", "⬛️", "⬛️", "⬛️", "⬛️" })]
-    [InlineData(1, new string[] { "⬛️", "⬛️", "⬛️", "⬛️", "🟩" })]
-    [InlineData(2, new string[] { "⬛️", "⬛️", "⬛️", "🟩", "🟩" })]
-    [InlineData(3, new string[] { "⬛️", "⬛️", "🟩", "🟩", "🟩" })]
-    [InlineData(4, new string[] { "⬛️", "🟩", "🟩", "🟩", "🟩" })]
-    [InlineData(5, new string[] { "🟩", "🟩", "🟩", "🟩", "🟩" })]
+    [InlineData(0, new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare })]
+    [InlineData(1, new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare })]
+    [InlineData(2, new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare })]
+    [InlineData(3, new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare })]
+    [InlineData(4, new[] { YellowSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
+    [InlineData(5, new[] { GreenSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
+    [InlineData(0, new[] { BlackSquare, BlackSquare, BlackSquare, BlackSquare, BlackSquare })]
+    [InlineData(1, new[] { BlackSquare, BlackSquare, BlackSquare, BlackSquare, GreenSquare })]
+    [InlineData(2, new[] { BlackSquare, BlackSquare, BlackSquare, GreenSquare, GreenSquare })]
+    [InlineData(3, new[] { BlackSquare, BlackSquare, GreenSquare, GreenSquare, GreenSquare })]
+    [InlineData(4, new[] { BlackSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
+    [InlineData(5, new[] { GreenSquare, GreenSquare, GreenSquare, GreenSquare, GreenSquare })]
     public void ShouldReturnGreenSquareCount(int expected, string[] line)
     {
-        SolutionReader.GreenSquareCount(line).ShouldBe(expected);
+        GreenSquareCount(line).ShouldBe(expected);
     }
 
     [Fact]
@@ -93,15 +88,15 @@ public class CoreTests
     {
         var lines = new []
         {
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
-            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
         };
 
-        SolutionReader.IsWordleNightmare(lines).ShouldBeTrue();
+        IsWordleNightmare(lines).ShouldBeTrue();
     }
     
     [Fact]
@@ -109,14 +104,14 @@ public class CoreTests
     {
         var lines = new []
         {
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟨" },
-            new string[] { "🟨", "🟨", "🟨", "🟨", "🟩" },
-            new string[] { "🟨", "🟨", "🟨", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
-            new string[] { "🟨", "🟩", "🟨", "🟩", "🟩" },
-            new string[] { "🟨", "🟨", "🟩", "🟩", "🟩" },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, YellowSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, YellowSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, YellowSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, GreenSquare, YellowSquare, GreenSquare, GreenSquare },
+            new[] { YellowSquare, YellowSquare, GreenSquare, GreenSquare, GreenSquare },
         };
 
-        SolutionReader.IsWordleNightmare(lines).ShouldBeFalse();
+        IsWordleNightmare(lines).ShouldBeFalse();
     }
 }
