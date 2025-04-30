@@ -10,7 +10,10 @@ public class SolutionReaderTests
     [Fact]
     public void ShouldFindGreenSquare()
     {
+        // Arrange
         var greenSquare = Green;
+        
+        // Act & Assert
         IsGreenSquare(greenSquare).ShouldBeTrue();
         IsBlackSquare(greenSquare).ShouldBeFalse();
         IsYellowSquare(greenSquare).ShouldBeFalse();
@@ -19,7 +22,10 @@ public class SolutionReaderTests
     [Fact]
     public void ShouldFindYellowSquare()
     {
+        // Arrange
         var yellowSquare = Yellow;
+        
+        // Act & Assert
         IsGreenSquare(yellowSquare).ShouldBeFalse();
         IsBlackSquare(yellowSquare).ShouldBeFalse();
         IsYellowSquare(yellowSquare).ShouldBeTrue();
@@ -28,7 +34,10 @@ public class SolutionReaderTests
     [Fact]
     public void ShouldFindBlackSquare()
     {
+        // Arrange
         var blackSquare = Black;
+        
+        // Act & Assert
         IsGreenSquare(blackSquare).ShouldBeFalse();
         IsBlackSquare(blackSquare).ShouldBeTrue();
         IsYellowSquare(blackSquare).ShouldBeFalse();
@@ -49,12 +58,14 @@ public class SolutionReaderTests
     [InlineData(5, new[] { Green, Green, Green, Green, Green })]
     public void ShouldReturnGreenSquareCount(int expected, string[] line)
     {
+        // Act & Assert
         GreenSquareCount(line).ShouldBe(expected);
     }
 
     [Fact]
     public void ShouldReturnTrueIfWordleNightmare()
     {
+        // Arrange
         var lines = new []
         {
             new[] { Yellow, Yellow, Yellow, Yellow, Yellow },
@@ -65,12 +76,14 @@ public class SolutionReaderTests
             new[] { Yellow, Yellow, Green, Green, Green },
         };
 
+        // Act & Assert
         IsWordleNightmare(lines).ShouldBeTrue();
     }
     
     [Fact]
     public void ShouldReturnFalseIfNotWordleNightmare()
     {
+        // Arrange
         var lines = new []
         {
             new[] { Yellow, Yellow, Yellow, Yellow, Yellow },
@@ -81,6 +94,85 @@ public class SolutionReaderTests
             new[] { Yellow, Yellow, Green, Green, Green },
         };
 
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+    [Fact]
+    public void ShouldReturnFalseIfOnlyFiveLines()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Green, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+        };
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+    [Fact]
+    public void ShouldReturnFalseIfMoreThanSixLines()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Green, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+        };
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+    [Fact]
+    public void ShouldReturnFalseIfNoLines()
+    {
+        // Arrange
+        string[][] lines = Array.Empty<string[]>();
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+    [Fact]
+    public void ShouldReturnFalseIfOnlyOneLine()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Green }
+        };
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+     
+    [Fact]
+    public void ShouldReturnFalseIfLinesHaveIncorrectNumberOfElements()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Yellow },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green, Yellow },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+        };
+
+        // Act & Assert
         IsWordleNightmare(lines).ShouldBeFalse();
     }
 }
