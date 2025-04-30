@@ -30,7 +30,7 @@ public static class SolutionReader
     {
         var items = lines.ToList(); // get them ordered to see the last ones 
         if (!HasWordleGameReachedMaxNumberOfLines(items)) return false;
-        
+        if (!HasCorrectNumberOfElementsInEveryLine(items)) return false;
         var lastLine = items.TakeLast(1).ToList()[0];
         var gsCount = GreenSquareCount(lastLine);
         var isMatch = true;
@@ -45,6 +45,20 @@ public static class SolutionReader
         }
 
         return isMatch;
+    }
+
+    private static bool HasCorrectNumberOfElementsInEveryLine(List<string[]> items)
+    {
+        const int expectedLineLength = 5;
+        foreach (var item in items)
+        {
+            if (item.Length != expectedLineLength)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static bool HasWordleGameReachedMaxNumberOfLines(List<string[]> items)

@@ -156,4 +156,23 @@ public class SolutionReaderTests
         // Act & Assert
         IsWordleNightmare(lines).ShouldBeFalse();
     }
+    
+     
+    [Fact]
+    public void ShouldReturnFalseIfLinesHaveIncorrectNumberOfElements()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Yellow },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green, Yellow },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+        };
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
 }
