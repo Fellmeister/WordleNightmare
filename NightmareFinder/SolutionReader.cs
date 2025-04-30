@@ -33,7 +33,9 @@ public static class SolutionReader
         var gsCount = GreenSquareCount(lastLine);
         var isMatch = true;
 
-        for (int i = 5; i > 2; i--)
+        var lastLineIndex = 5;
+        var minimumNightmareLineCount = 3;
+        for (int i = lastLineIndex; i >= minimumNightmareLineCount; i--)
         {
             var temp = items[i];
             isMatch = isMatch && items[i].SequenceEqual(lastLine) && gsCount == GreenSquareCount(items[i]);

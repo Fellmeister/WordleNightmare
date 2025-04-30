@@ -11,6 +11,7 @@ public class SolutionReaderTests
     public void ShouldFindGreenSquare()
     {
         var greenSquare = Green;
+        
         IsGreenSquare(greenSquare).ShouldBeTrue();
         IsBlackSquare(greenSquare).ShouldBeFalse();
         IsYellowSquare(greenSquare).ShouldBeFalse();
@@ -20,6 +21,7 @@ public class SolutionReaderTests
     public void ShouldFindYellowSquare()
     {
         var yellowSquare = Yellow;
+        
         IsGreenSquare(yellowSquare).ShouldBeFalse();
         IsBlackSquare(yellowSquare).ShouldBeFalse();
         IsYellowSquare(yellowSquare).ShouldBeTrue();
@@ -29,6 +31,7 @@ public class SolutionReaderTests
     public void ShouldFindBlackSquare()
     {
         var blackSquare = Black;
+        
         IsGreenSquare(blackSquare).ShouldBeFalse();
         IsBlackSquare(blackSquare).ShouldBeTrue();
         IsYellowSquare(blackSquare).ShouldBeFalse();
