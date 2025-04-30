@@ -30,9 +30,10 @@ public static class SolutionReader
     {
         var items = lines.ToList(); // get them ordered to see the last ones 
         
-        return HasWordleGameReachedMaxNumberOfLines(items)
-               && HasCorrectNumberOfElementsInEveryLine(items)
-                && HasWordleLastThreeLinesEndedInANightmare(items);
+        if (!HasWordleGameReachedMaxNumberOfLines(items)) return false;
+        if (!HasCorrectNumberOfElementsInEveryLine(items)) return false;
+        
+        return HasWordleLastThreeLinesEndedInANightmare(items);
     }
 
     private static bool HasWordleLastThreeLinesEndedInANightmare(List<string[]> items)
