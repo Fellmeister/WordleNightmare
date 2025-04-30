@@ -33,10 +33,10 @@ public static class SolutionReader
         if (!HasWordleGameReachedMaxNumberOfLines(items)) return false;
         if (!HasCorrectNumberOfElementsInEveryLine(items)) return false;
         
-        return HasWordleLastThreeLinesEndedInANightmare(items);
+        return HasLastThreeLinesOfWordleGameGotSamePattern(items);
     }
 
-    private static bool HasWordleLastThreeLinesEndedInANightmare(List<string[]> items)
+    private static bool HasLastThreeLinesOfWordleGameGotSamePattern(List<string[]> items)
     {
         var lastLine = items.TakeLast(1).ToList()[0];
         var gsCount = GreenSquareCount(lastLine);
