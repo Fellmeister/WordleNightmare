@@ -29,12 +29,15 @@ public static class SolutionReader
     public static bool IsWordleNightmare(string[][] lines)
     {
         var items = lines.ToList(); // get them ordered to see the last ones 
+        if (!HasWordleGameReachedMaxNumberOfLines(items)) return false;
+        
         var lastLine = items.TakeLast(1).ToList()[0];
         var gsCount = GreenSquareCount(lastLine);
         var isMatch = true;
 
         var lastLineIndex = 5;
         var minimumNightmareLineCount = 3;
+        
         for (int i = lastLineIndex; i >= minimumNightmareLineCount; i--)
         {
             var temp = items[i];
@@ -42,5 +45,16 @@ public static class SolutionReader
         }
 
         return isMatch;
+    }
+
+    private static bool HasWordleGameReachedMaxNumberOfLines(List<string[]> items)
+    {
+        var maximumWordleLinesAllowed = 6;
+        if (items.Count < maximumWordleLinesAllowed)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

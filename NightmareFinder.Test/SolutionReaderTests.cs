@@ -97,4 +97,63 @@ public class SolutionReaderTests
         // Act & Assert
         IsWordleNightmare(lines).ShouldBeFalse();
     }
+    
+    [Fact]
+    public void ShouldReturnFalseIfOnlyFiveLines()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Green, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+        };
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+    [Fact]
+    public void ShouldReturnFalseIfMoreThanSixLines()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Yellow, Green },
+            new[] { Yellow, Yellow, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+            new[] { Yellow, Green, Yellow, Green, Green },
+            new[] { Yellow, Yellow, Green, Green, Green },
+        };
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+    [Fact]
+    public void ShouldReturnFalseIfNoLines()
+    {
+        // Arrange
+        string[][] lines = Array.Empty<string[]>();
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
+    
+    [Fact]
+    public void ShouldReturnFalseIfOnlyOneLine()
+    {
+        // Arrange
+        var lines = new []
+        {
+            new[] { Yellow, Yellow, Yellow, Yellow, Green }
+        };
+
+        // Act & Assert
+        IsWordleNightmare(lines).ShouldBeFalse();
+    }
 }
